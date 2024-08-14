@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Course class definition
 class Course {
     private String courseCode;
     private String title;
@@ -60,7 +59,6 @@ class Course {
     }
 }
 
-// Student class definition
 class Student {
     private int studentID;
     private String name;
@@ -87,19 +85,12 @@ class Student {
     public void registerCourse(Course course) {
         if (course.registerStudent()) {
             registeredCourses.add(course);
-            System.out.println("Course registered successfully.");
-        } else {
-            System.out.println("Course registration failed. No available slots.");
         }
     }
 
     public void dropCourse(Course course) {
-        if (registeredCourses.remove(course)) {
-            course.dropStudent();
-            System.out.println("Course dropped successfully.");
-        } else {
-            System.out.println("You are not registered in this course.");
-        }
+        course.dropStudent();
+        registeredCourses.remove(course);
     }
 
     @Override
@@ -114,7 +105,6 @@ class Student {
     }
 }
 
-// Main class for the Student Course Registration System
 public class Task_4_StudentCourseRegistrationSystem {
     private List<Student> students;
     private List<Course> courses;
@@ -154,14 +144,14 @@ public class Task_4_StudentCourseRegistrationSystem {
         Scanner scanner = new Scanner(System.in);
         Task_4_StudentCourseRegistrationSystem system = new Task_4_StudentCourseRegistrationSystem();
 
-        // Add initial students and courses
+        // Add initial students and courses here
         system.addStudent(new Student(1, "John Doe"));
         system.addStudent(new Student(2, "Jane Smith"));
         system.addCourse(new Course("CS101", "Introduction to Programming", "Learn the basics of programming", 50, "Mon, Wed 9:00 AM - 10:30 AM"));
         system.addCourse(new Course("MATH202", "Advanced Mathematics", "Advanced math concepts", 40, "Tue, Thu 11:00 AM - 12:30 PM"));
 
         while (true) {
-            System.out.println("\nStudent Course Registration System");
+            System.out.println("Student Course Registration System");
             System.out.println("1. Register Course");
             System.out.println("2. Drop Course");
             System.out.println("3. Display Student Info");
@@ -182,6 +172,7 @@ public class Task_4_StudentCourseRegistrationSystem {
                     Course course = system.findCourseByCode(courseCode);
                     if (student != null && course != null) {
                         student.registerCourse(course);
+                        System.out.println("Course registered successfully.");
                     } else {
                         System.out.println("Student or course not found.");
                     }
@@ -196,6 +187,7 @@ public class Task_4_StudentCourseRegistrationSystem {
                     Course courseDrop = system.findCourseByCode(courseCodeDrop);
                     if (studentDrop != null && courseDrop != null) {
                         studentDrop.dropCourse(courseDrop);
+                        System.out.println("Course dropped successfully.");
                     } else {
                         System.out.println("Student or course not found.");
                     }
